@@ -19,4 +19,4 @@
 
 2. Mobile display 
 
-...
+<img src="images/Display.jpg" width="600" length="300" >
