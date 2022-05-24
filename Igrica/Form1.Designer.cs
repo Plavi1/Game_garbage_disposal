@@ -41,6 +41,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox5Panel = new System.Windows.Forms.PictureBox();
+            this.pictureBox4Panel = new System.Windows.Forms.PictureBox();
+            this.pictureBox2Panel = new System.Windows.Forms.PictureBox();
+            this.pictureBox3Panel = new System.Windows.Forms.PictureBox();
+            this.pictureBox1Panel = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.KantaPlastika)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -51,6 +58,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ExitButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResetAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5Panel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4Panel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2Panel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3Panel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1Panel)).BeginInit();
             this.SuspendLayout();
             // 
             // KantaPlastika
@@ -160,11 +173,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Impact", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Font = new System.Drawing.Font("Impact", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(957, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 41);
+            this.label1.Size = new System.Drawing.Size(185, 75);
             this.label1.TabIndex = 10;
             this.label1.Text = "label1";
             // 
@@ -174,7 +187,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Lime;
-            this.label2.Location = new System.Drawing.Point(936, 323);
+            this.label2.Location = new System.Drawing.Point(807, 213);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(171, 67);
             this.label2.TabIndex = 11;
@@ -193,6 +206,91 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.panel1.Controls.Add(this.pictureBox5Panel);
+            this.panel1.Controls.Add(this.pictureBox4Panel);
+            this.panel1.Controls.Add(this.pictureBox2Panel);
+            this.panel1.Controls.Add(this.pictureBox3Panel);
+            this.panel1.Controls.Add(this.pictureBox1Panel);
+            this.panel1.Location = new System.Drawing.Point(1698, -1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(238, 716);
+            this.panel1.TabIndex = 12;
+            // 
+            // pictureBox5Panel
+            // 
+            this.pictureBox5Panel.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox5Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5Panel.BackgroundImage")));
+            this.pictureBox5Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox5Panel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox5Panel.Location = new System.Drawing.Point(40, 40);
+            this.pictureBox5Panel.Name = "pictureBox5Panel";
+            this.pictureBox5Panel.Size = new System.Drawing.Size(125, 84);
+            this.pictureBox5Panel.TabIndex = 5;
+            this.pictureBox5Panel.TabStop = false;
+            // 
+            // pictureBox4Panel
+            // 
+            this.pictureBox4Panel.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox4Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4Panel.BackgroundImage")));
+            this.pictureBox4Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox4Panel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox4Panel.Location = new System.Drawing.Point(62, 159);
+            this.pictureBox4Panel.Name = "pictureBox4Panel";
+            this.pictureBox4Panel.Size = new System.Drawing.Size(84, 111);
+            this.pictureBox4Panel.TabIndex = 4;
+            this.pictureBox4Panel.TabStop = false;
+            // 
+            // pictureBox2Panel
+            // 
+            this.pictureBox2Panel.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2Panel.BackgroundImage")));
+            this.pictureBox2Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2Panel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox2Panel.Location = new System.Drawing.Point(52, 312);
+            this.pictureBox2Panel.Name = "pictureBox2Panel";
+            this.pictureBox2Panel.Size = new System.Drawing.Size(113, 97);
+            this.pictureBox2Panel.TabIndex = 2;
+            this.pictureBox2Panel.TabStop = false;
+            // 
+            // pictureBox3Panel
+            // 
+            this.pictureBox3Panel.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox3Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3Panel.BackgroundImage")));
+            this.pictureBox3Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox3Panel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3Panel.Location = new System.Drawing.Point(52, 441);
+            this.pictureBox3Panel.Name = "pictureBox3Panel";
+            this.pictureBox3Panel.Size = new System.Drawing.Size(99, 81);
+            this.pictureBox3Panel.TabIndex = 3;
+            this.pictureBox3Panel.TabStop = false;
+            // 
+            // pictureBox1Panel
+            // 
+            this.pictureBox1Panel.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1Panel.BackgroundImage")));
+            this.pictureBox1Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1Panel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1Panel.Location = new System.Drawing.Point(40, 543);
+            this.pictureBox1Panel.Name = "pictureBox1Panel";
+            this.pictureBox1Panel.Size = new System.Drawing.Size(140, 126);
+            this.pictureBox1Panel.TabIndex = 0;
+            this.pictureBox1Panel.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Impact", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(793, 280);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(194, 75);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "label3";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -200,7 +298,9 @@
             this.BackgroundImage = global::Igrica.Properties.Resources.Beckground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1902, 973);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ResetAll);
             this.Controls.Add(this.ExitButton);
@@ -226,6 +326,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.ExitButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResetAll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5Panel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4Panel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2Panel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3Panel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1Panel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,5 +350,12 @@
         private Label label1;
         private Label label2;
         private PictureBox pictureBox1;
+        private Panel panel1;
+        private PictureBox pictureBox5Panel;
+        private PictureBox pictureBox4Panel;
+        private PictureBox pictureBox2Panel;
+        private PictureBox pictureBox3Panel;
+        private PictureBox pictureBox1Panel;
+        private Label label3;
     }
 }

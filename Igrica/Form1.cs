@@ -7,8 +7,8 @@ namespace Igrica
         private int ubacenoSmecaUKante = 0;
         private int labelVrednost = 0;
 
-        private Dictionary<string, Point> defaultPozicije = new ();
-
+        private Dictionary<string, Point> defaultPozicije = new();
+        private List<PictureBox> listaPictureBoxovaUPanelu = new();
 
         public Form1()
         {
@@ -22,7 +22,9 @@ namespace Igrica
             this.WindowState = FormWindowState.Maximized;   
             label1.Text = labelVrednost.ToString();
             label2.Text = "";
+            label3.Text = "";
             PostaviDefaultPozicije();
+            PanelPictureBoxToList();
         }
 
         private async void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -73,14 +75,37 @@ namespace Igrica
         }
         private void PostaviDefaultPozicije()
         {
-            var velicinaEkrana = Screen.PrimaryScreen.WorkingArea.Size; 
+            //var velicinaEkrana = Screen.PrimaryScreen.WorkingArea.Size; 
 
-            // postavljamo default pozicije onako kako su na Form Designu stavljene
-            defaultPozicije.Add(pictureBox1.Name, pictureBox1.Location);
-            defaultPozicije.Add(pictureBox2.Name, pictureBox2.Location);
-            defaultPozicije.Add(pictureBox3.Name, pictureBox3.Location);
-            defaultPozicije.Add(pictureBox4.Name, pictureBox4.Location);
-            defaultPozicije.Add(pictureBox5.Name, pictureBox5.Location);
+            Random rnd = new();
+
+            List<Point> listaSvihLokacijaPredmeta = new()
+            {
+                pictureBox1.Location,
+                pictureBox2.Location,
+                pictureBox3.Location,
+                pictureBox4.Location,
+                pictureBox5.Location
+            };
+            List<PictureBox> listaSvihPictureBoxova = new()
+            {
+                pictureBox1,
+                pictureBox2,
+                pictureBox3,
+                pictureBox4,
+                pictureBox5
+            };
+
+            foreach(var pictureBox in listaSvihPictureBoxova)
+            {
+                int num = rnd.Next(0, listaSvihLokacijaPredmeta.Count);
+
+                pictureBox.Location = listaSvihLokacijaPredmeta[num];
+                defaultPozicije.Add(pictureBox.Name, pictureBox.Location);
+
+                listaSvihLokacijaPredmeta.RemoveAt(num);
+            }
+
         }
         private async Task LogikaSmeceUKanti(PictureBox pictureBox, string tipSmeca)
         {
@@ -96,6 +121,7 @@ namespace Igrica
                 if(tipSmeca == "staklo")
                 {
                     pictureBox.Hide();
+                    ObrisiIzPanela(pictureBox.Name);
                     ubacenoSmecaUKante++;
                     labelVrednost++;
                     label1.Text = labelVrednost.ToString();
@@ -106,7 +132,9 @@ namespace Igrica
                 else
                 {
                     pictureBox.Location = defaultPozicije[pictureBox.Name];
-                    MessageBox.Show("Pogresna kanta!");
+                    label3.Text = "POGRESNA KANTA!";
+                    await Task.Delay(1000);
+                    label3.Text = "";
                 }
             }
 
@@ -116,6 +144,7 @@ namespace Igrica
                 if (tipSmeca == "plastika")
                 {
                     pictureBox.Hide();
+                    ObrisiIzPanela(pictureBox.Name);
                     ubacenoSmecaUKante++;
                     labelVrednost++;
                     label1.Text = labelVrednost.ToString();
@@ -126,7 +155,9 @@ namespace Igrica
                 else
                 {
                     pictureBox.Location = defaultPozicije[pictureBox.Name];
-                    MessageBox.Show("Pogresna kanta!");
+                    label3.Text = "POGRESNA KANTA!";
+                    await Task.Delay(1000);
+                    label3.Text = "";
                 }
             }
 
@@ -136,6 +167,7 @@ namespace Igrica
                 if (tipSmeca == "papir")
                 {
                     pictureBox.Hide();
+                    ObrisiIzPanela(pictureBox.Name);
                     ubacenoSmecaUKante++;
                     labelVrednost++;
                     label1.Text = labelVrednost.ToString();
@@ -147,7 +179,9 @@ namespace Igrica
                 else
                 {
                     pictureBox.Location = defaultPozicije[pictureBox.Name];
-                    MessageBox.Show("Pogresna kanta!");
+                    label3.Text = "POGRESNA KANTA!";
+                    await Task.Delay(1000);
+                    label3.Text = "";
                 }
             }
 
@@ -176,6 +210,42 @@ namespace Igrica
             pictureBox3.Location = defaultPozicije[pictureBox3.Name];
             pictureBox4.Location = defaultPozicije[pictureBox4.Name];
             pictureBox5.Location = defaultPozicije[pictureBox5.Name];
+
+            defaultPozicije = new Dictionary<string, Point>();
+            PostaviDefaultPozicije();
+
+            PanelPictureBoxToList();
+
+            pictureBox1Panel.Show();
+            pictureBox2Panel.Show();
+            pictureBox3Panel.Show();
+            pictureBox4Panel.Show();
+            pictureBox5Panel.Show();   
         }
+
+        private void ObrisiIzPanela(string pictureBoxName)
+        {
+            string pictureBoxNameForDelete = $"{pictureBoxName}Panel";
+
+            foreach(PictureBox pictureBoxPanel in listaPictureBoxovaUPanelu)
+            {
+                if(pictureBoxPanel.Name == pictureBoxNameForDelete)
+                {
+                    pictureBoxPanel.Hide();
+                    listaPictureBoxovaUPanelu.Remove(pictureBoxPanel);
+                    return;
+                }
+            }
+        }
+        private void PanelPictureBoxToList()
+        {
+            listaPictureBoxovaUPanelu.Add(pictureBox1Panel);
+            listaPictureBoxovaUPanelu.Add(pictureBox2Panel);
+            listaPictureBoxovaUPanelu.Add(pictureBox3Panel);
+            listaPictureBoxovaUPanelu.Add(pictureBox4Panel);
+            listaPictureBoxovaUPanelu.Add(pictureBox5Panel);
+
+        }
+
     }
 }
