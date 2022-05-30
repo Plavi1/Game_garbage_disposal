@@ -1,14 +1,18 @@
+﻿
+using System.Media;
 
 namespace Igrica
 {
     public partial class Form1 : Form
     {
-        private string[] tipoviSmeca = { "staklo", "papir", "plastika" };
-        private int ubacenoSmecaUKante = 0;
-        private int labelVrednost = 0;
 
+        private int ubacenoSmecaUKante, label1Vrednost, brojPictureBoxova;
+
+        private Dictionary<string, Rectangle> tipoviKantiZaSmeceIPozicije = new();
         private Dictionary<string, Point> defaultPozicije = new();
+
         private List<PictureBox> listaPictureBoxovaUPanelu = new();
+        private List<PictureBox> listaPictureBoxova = new();
 
         public Form1()
         {
@@ -19,35 +23,40 @@ namespace Igrica
         {
             this.TopMost = true;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;   
-            label1.Text = labelVrednost.ToString();
+            this.WindowState = FormWindowState.Maximized;  
+
+            PanelPictureBoxToList();
+            PictureBoxToList();
+            InicijalizujTipoviKantiZaSmeceIPozicije();
+
+            brojPictureBoxova = listaPictureBoxova.Count;
+            label1.Text = label1Vrednost.ToString();
             label2.Text = "";
             label3.Text = "";
             PostaviDefaultPozicije();
-            PanelPictureBoxToList();
         }
 
         private async void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            await Logika(pictureBox1, e, tipoviSmeca[0]);
+            await Logika(pictureBox1, e, Smece.Staklo.ToString());
         }
 
         private async void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
-           await Logika(pictureBox2 , e, tipoviSmeca[1]);
+           await Logika(pictureBox2 , e, Smece.Papir.ToString());
         }
 
         private async void pictureBox3_MouseMove(object sender, MouseEventArgs e)
         {
-           await Logika(pictureBox3 , e, tipoviSmeca[1]);
+           await Logika(pictureBox3 , e, Smece.Papir.ToString());
         }
         private async void pictureBox4_MouseMove(object sender, MouseEventArgs e)
         {
-            await Logika(pictureBox4, e, tipoviSmeca[2]);
+            await Logika(pictureBox4, e, Smece.Plastika.ToString());
         }
         private async void pictureBox5_MouseMove(object sender, MouseEventArgs e)
         {
-           await Logika(pictureBox5, e, tipoviSmeca[2]);
+           await Logika(pictureBox5, e, Smece.Plastika.ToString());
         }
 
         private async Task Logika(PictureBox pictureBox, MouseEventArgs e, string tipSmeca)
@@ -61,10 +70,12 @@ namespace Igrica
 
                await LogikaSmeceUKanti(pictureBox, tipSmeca); //funkcija koja proverava da li je smece u kanti 
 
-               if(labelVrednost == 5)
-                {
-                    label2.Text = "USPELI STE DA OCISTITE SMECE!";
-                }
+               if(label1Vrednost == brojPictureBoxova)
+               {
+                    SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\PC\source\repos\ProjekatZaFakultet\Igrica\wavfile\Win.wav");
+                    simpleSound.Play();
+                    label2.Text = "УСПЕЛИ СТЕ!";
+               }
             }
             else                     
             {
@@ -78,113 +89,54 @@ namespace Igrica
             //var velicinaEkrana = Screen.PrimaryScreen.WorkingArea.Size; 
 
             Random rnd = new();
+            int num;
 
-            List<Point> listaSvihLokacijaPredmeta = new()
-            {
-                pictureBox1.Location,
-                pictureBox2.Location,
-                pictureBox3.Location,
-                pictureBox4.Location,
-                pictureBox5.Location
-            };
-            List<PictureBox> listaSvihPictureBoxova = new()
-            {
-                pictureBox1,
-                pictureBox2,
-                pictureBox3,
-                pictureBox4,
-                pictureBox5
-            };
+            List<Point> listaSvihLokacijaPredmeta = new();
 
-            foreach(var pictureBox in listaSvihPictureBoxova)
+            foreach(PictureBox pBox in listaPictureBoxova)
             {
-                int num = rnd.Next(0, listaSvihLokacijaPredmeta.Count);
+                listaSvihLokacijaPredmeta.Add(pBox.Location);
+            }
+            
+            foreach(PictureBox pBox in listaPictureBoxova)
+            {
+                num = rnd.Next(0, listaSvihLokacijaPredmeta.Count);
 
-                pictureBox.Location = listaSvihLokacijaPredmeta[num];
-                defaultPozicije.Add(pictureBox.Name, pictureBox.Location);
+                pBox.Location = listaSvihLokacijaPredmeta[num];
+                defaultPozicije.Add(pBox.Name, pBox.Location);
 
                 listaSvihLokacijaPredmeta.RemoveAt(num);
             }
-
         }
+
         private async Task LogikaSmeceUKanti(PictureBox pictureBox, string tipSmeca)
         {
-            var pozicijaSmeca = new System.Drawing.Rectangle(pictureBox.Location, pictureBox.Size);
+            var pozicijaSmeca = new Rectangle(pictureBox.Location, pictureBox.Size);
 
-            var pozicijaKantePlastika = new System.Drawing.Rectangle(KantaPlastika.Location, KantaPlastika.Size);
-            var pozicijaKantePapir = new System.Drawing.Rectangle(KantaPapir.Location, KantaPapir.Size);
-            var pozicijaKanteStaklo = new System.Drawing.Rectangle(KantaStaklo.Location, KantaStaklo.Size);
-
-            //Provera KantaStaklo
-            if (pozicijaSmeca.IntersectsWith(pozicijaKanteStaklo))
+            foreach(var kanta in tipoviKantiZaSmeceIPozicije)
             {
-                if(tipSmeca == "staklo")
+                if (pozicijaSmeca.IntersectsWith(kanta.Value))
                 {
-                    pictureBox.Hide();
-                    ObrisiIzPanela(pictureBox.Name);
-                    ubacenoSmecaUKante++;
-                    labelVrednost++;
-                    label1.Text = labelVrednost.ToString();
-                    label2.Text = $"Bravo! {labelVrednost}/5";
-                    await Task.Delay(3000);
-                    label2.Text = "";
-                }
-                else
-                {
-                    pictureBox.Location = defaultPozicije[pictureBox.Name];
-                    label3.Text = "POGRESNA KANTA!";
-                    await Task.Delay(1000);
-                    label3.Text = "";
+                    if (tipSmeca == kanta.Key)
+                    {
+                        pictureBox.Hide();
+                        ObrisiIzPanela(pictureBox.Name);
+                        ubacenoSmecaUKante++;
+                        label1Vrednost++;
+                        label1.Text = label1Vrednost.ToString();
+                        label2.Text = $"БРАВО! {label1Vrednost}/{brojPictureBoxova}";
+                        await Task.Delay(1000);
+                        label2.Text = "";
+                    }
+                    else
+                    {
+                        pictureBox.Location = defaultPozicije[pictureBox.Name];
+                        label3.Text = "ПОГРЕШНА КАНТА!";
+                        await Task.Delay(1000);
+                        label3.Text = "";
+                    }
                 }
             }
-
-            //Provera KantaPlastika
-            else if (pozicijaSmeca.IntersectsWith(pozicijaKantePlastika))
-            {
-                if (tipSmeca == "plastika")
-                {
-                    pictureBox.Hide();
-                    ObrisiIzPanela(pictureBox.Name);
-                    ubacenoSmecaUKante++;
-                    labelVrednost++;
-                    label1.Text = labelVrednost.ToString();
-                    label2.Text = $"Bravo! {labelVrednost}/5";
-                    await Task.Delay(3000);
-                    label2.Text = "";
-                }
-                else
-                {
-                    pictureBox.Location = defaultPozicije[pictureBox.Name];
-                    label3.Text = "POGRESNA KANTA!";
-                    await Task.Delay(1000);
-                    label3.Text = "";
-                }
-            }
-
-            //Provera KantaPapir
-            else if (pozicijaSmeca.IntersectsWith(pozicijaKantePapir))
-            {
-                if (tipSmeca == "papir")
-                {
-                    pictureBox.Hide();
-                    ObrisiIzPanela(pictureBox.Name);
-                    ubacenoSmecaUKante++;
-                    labelVrednost++;
-                    label1.Text = labelVrednost.ToString();
-                    label2.Text = $"Bravo! {labelVrednost}/5";
-                    await Task.Delay(3000);
-                    label2.Text = "";
-
-                }
-                else
-                {
-                    pictureBox.Location = defaultPozicije[pictureBox.Name];
-                    label3.Text = "POGRESNA KANTA!";
-                    await Task.Delay(1000);
-                    label3.Text = "";
-                }
-            }
-
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -195,32 +147,26 @@ namespace Igrica
         private void ResetAll_Click(object sender, EventArgs e)
         {
             ubacenoSmecaUKante = 0;
-            labelVrednost = 0;
-            label1.Text = labelVrednost.ToString();
+            label1Vrednost = 0;
+            label1.Text = label1Vrednost.ToString();
             label2.Text = "";
 
-            pictureBox1.Show();
-            pictureBox2.Show();
-            pictureBox3.Show();
-            pictureBox4.Show();
-            pictureBox5.Show();
+            foreach(PictureBox pBox in listaPictureBoxova)
+            {
+                pBox.Show();           
+                pBox.Location = defaultPozicije[pBox.Name]; 
+            }
 
-            pictureBox1.Location = defaultPozicije[pictureBox1.Name];
-            pictureBox2.Location = defaultPozicije[pictureBox2.Name];
-            pictureBox3.Location = defaultPozicije[pictureBox3.Name];
-            pictureBox4.Location = defaultPozicije[pictureBox4.Name];
-            pictureBox5.Location = defaultPozicije[pictureBox5.Name];
 
             defaultPozicije = new Dictionary<string, Point>();
             PostaviDefaultPozicije();
 
             PanelPictureBoxToList();
 
-            pictureBox1Panel.Show();
-            pictureBox2Panel.Show();
-            pictureBox3Panel.Show();
-            pictureBox4Panel.Show();
-            pictureBox5Panel.Show();   
+            foreach(PictureBox pBoxPanel in listaPictureBoxovaUPanelu)
+            {
+                pBoxPanel.Show();
+            }
         }
 
         private void ObrisiIzPanela(string pictureBoxName)
@@ -244,6 +190,21 @@ namespace Igrica
             listaPictureBoxovaUPanelu.Add(pictureBox3Panel);
             listaPictureBoxovaUPanelu.Add(pictureBox4Panel);
             listaPictureBoxovaUPanelu.Add(pictureBox5Panel);
+
+        }
+        private void PictureBoxToList()
+        {
+            listaPictureBoxova.Add(pictureBox1);
+            listaPictureBoxova.Add(pictureBox2);
+            listaPictureBoxova.Add(pictureBox3);
+            listaPictureBoxova.Add(pictureBox4);
+            listaPictureBoxova.Add(pictureBox5);
+        }
+        private void InicijalizujTipoviKantiZaSmeceIPozicije()
+        { 
+            tipoviKantiZaSmeceIPozicije.Add(Smece.Plastika.ToString(), new Rectangle(KantaPlastika.Location, KantaPlastika.Size));
+            tipoviKantiZaSmeceIPozicije.Add(Smece.Papir.ToString(), new Rectangle(KantaPapir.Location, KantaPapir.Size));
+            tipoviKantiZaSmeceIPozicije.Add(Smece.Staklo.ToString(), new Rectangle(KantaStaklo.Location, KantaStaklo.Size));
 
         }
 

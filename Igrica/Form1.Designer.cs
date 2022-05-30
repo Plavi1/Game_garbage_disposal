@@ -107,7 +107,7 @@
             this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox4.Location = new System.Drawing.Point(1109, 440);
+            this.pictureBox4.Location = new System.Drawing.Point(1093, 440);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(84, 111);
             this.pictureBox4.TabIndex = 4;
@@ -186,7 +186,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.Lime;
+            this.label2.ForeColor = System.Drawing.Color.Green;
             this.label2.Location = new System.Drawing.Point(807, 213);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(171, 67);
@@ -216,7 +216,7 @@
             this.panel1.Controls.Add(this.pictureBox1Panel);
             this.panel1.Location = new System.Drawing.Point(1698, -1);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(238, 716);
+            this.panel1.Size = new System.Drawing.Size(238, 699);
             this.panel1.TabIndex = 12;
             // 
             // pictureBox5Panel
