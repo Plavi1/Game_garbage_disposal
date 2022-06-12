@@ -68,6 +68,7 @@
             // 
             // KantaPlastika
             // 
+            this.KantaPlastika.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.KantaPlastika.BackColor = System.Drawing.Color.Transparent;
             this.KantaPlastika.Location = new System.Drawing.Point(759, 615);
             this.KantaPlastika.Name = "KantaPlastika";
@@ -77,6 +78,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -90,6 +92,7 @@
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -103,6 +106,7 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4.BackgroundImage")));
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -116,6 +120,7 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.BackgroundImage")));
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -129,6 +134,7 @@
             // 
             // KantaPapir
             // 
+            this.KantaPapir.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.KantaPapir.BackColor = System.Drawing.Color.Transparent;
             this.KantaPapir.Location = new System.Drawing.Point(429, 615);
             this.KantaPapir.Name = "KantaPapir";
@@ -138,6 +144,7 @@
             // 
             // KantaStaklo
             // 
+            this.KantaStaklo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.KantaStaklo.BackColor = System.Drawing.Color.Transparent;
             this.KantaStaklo.Location = new System.Drawing.Point(88, 615);
             this.KantaStaklo.Name = "KantaStaklo";
@@ -147,6 +154,7 @@
             // 
             // ExitButton
             // 
+            this.ExitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ExitButton.BackColor = System.Drawing.Color.Transparent;
             this.ExitButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ExitButton.BackgroundImage")));
             this.ExitButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -159,6 +167,7 @@
             // 
             // ResetAll
             // 
+            this.ResetAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ResetAll.BackColor = System.Drawing.Color.Transparent;
             this.ResetAll.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ResetAll.BackgroundImage")));
             this.ResetAll.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -171,6 +180,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Impact", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -183,11 +193,12 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Green;
-            this.label2.Location = new System.Drawing.Point(807, 213);
+            this.label2.Location = new System.Drawing.Point(816, 213);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(171, 67);
             this.label2.TabIndex = 11;
@@ -195,6 +206,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -208,6 +220,7 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.panel1.Controls.Add(this.pictureBox5Panel);
             this.panel1.Controls.Add(this.pictureBox4Panel);
@@ -221,6 +234,7 @@
             // 
             // pictureBox5Panel
             // 
+            this.pictureBox5Panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox5Panel.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5Panel.BackgroundImage")));
             this.pictureBox5Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -233,6 +247,7 @@
             // 
             // pictureBox4Panel
             // 
+            this.pictureBox4Panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox4Panel.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox4Panel.BackgroundImage")));
             this.pictureBox4Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -245,6 +260,7 @@
             // 
             // pictureBox2Panel
             // 
+            this.pictureBox2Panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox2Panel.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2Panel.BackgroundImage")));
             this.pictureBox2Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -257,6 +273,7 @@
             // 
             // pictureBox3Panel
             // 
+            this.pictureBox3Panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox3Panel.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3Panel.BackgroundImage")));
             this.pictureBox3Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -269,6 +286,7 @@
             // 
             // pictureBox1Panel
             // 
+            this.pictureBox1Panel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox1Panel.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1Panel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1Panel.BackgroundImage")));
             this.pictureBox1Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -281,6 +299,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Impact", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
