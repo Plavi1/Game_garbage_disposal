@@ -1,15 +1,15 @@
-﻿
+﻿using Igrica.Model;
 using System.Media;
 
 namespace Igrica
 {
     public partial class Form1 : Form
     {
-        private int brSmecaUKanti, brSmeca;
+        private int brSmecaUKanti;
 
-        private Dictionary<PictureBox, PictureBox> listaSmecaSaSmecemUPanelu = new();
         private Dictionary<string, Rectangle> tipoviKantiZaSmeceIPozicije = new();
-        private Dictionary<string, Point> defaultPozicijeSmeca = new();
+
+        private PromenljiveBase? promenljive;  //Zato sto ce svaka promenljiva naslediti abstraktnu klasu 
 
         public Form1()
         {
@@ -18,15 +18,27 @@ namespace Igrica
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //var velicinaEkrana = Screen.PrimaryScreen.WorkingArea.Size;
+           // var velicinaEkrana = Screen.PrimaryScreen.WorkingArea.Size;   //pazi ako zelis da vidis velicinu ekrana, stavi u neku drugu f-ju
 
-            RasiriProzorPrekoCelogEkrana();  //Expand the screen
+            RasiriProzorPrekoCelogEkrana();  
 
-            InicijalizujListuSmecaSaSmecemUPanelu();
             InicijalizujTipoveKantiZaSmeceINjihovePozicije();
 
-            PostaviDefaultPozicijeSmeca();
             PostaviDefaultVrednostLabela();
+
+            panelIzaberiIgru.Dock = DockStyle.Fill;
+
+        }
+        private Dictionary<PictureBox, PictureBox> DictionarySmeceISmeceUPanelu()
+        {
+            return new Dictionary<PictureBox, PictureBox>()
+            {
+                {pictureBox1, pictureBox1Panel },
+                {pictureBox2, pictureBox2Panel },
+                {pictureBox3, pictureBox3Panel },
+                {pictureBox4, pictureBox4Panel },
+                {pictureBox5, pictureBox5Panel },
+            };
         }
 
         private async void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -63,7 +75,7 @@ namespace Igrica
 
                await LogikaSmeceUKanti(pictureBox, tipSmeca); //funkcija koja proverava da li je smece u kanti 
 
-               if(brSmecaUKanti == brSmeca)
+               if(brSmecaUKanti == promenljive.BrSmeca)
                {
                     SoundPlayer simpleSound = new SoundPlayer(@"C:\Users\PC\source\repos\ProjekatZaFakultet\Igrica\wavfile\Win.wav");
                     simpleSound.Play();
@@ -77,28 +89,6 @@ namespace Igrica
                 pictureBox.Top += (e.Y - misPozicijaY);
             }
         }
-        private void PostaviDefaultPozicijeSmeca()
-        {
-            Random rnd = new();
-            int num;
-
-            List<Point> listaSvihLokacijaPredmeta = new();
-
-            foreach(var pBox in listaSmecaSaSmecemUPanelu)
-            {
-                listaSvihLokacijaPredmeta.Add(pBox.Key.Location);
-            }
-            
-            foreach(var pBox in listaSmecaSaSmecemUPanelu)
-            {
-                num = rnd.Next(0, listaSvihLokacijaPredmeta.Count);
-
-                pBox.Key.Location = listaSvihLokacijaPredmeta[num];
-                defaultPozicijeSmeca.Add(pBox.Key.Name, pBox.Key.Location);
-
-                listaSvihLokacijaPredmeta.RemoveAt(num);
-            }
-        }
 
         private async Task LogikaSmeceUKanti(PictureBox pictureBox, string tipSmeca)
         {
@@ -110,17 +100,16 @@ namespace Igrica
                 {
                     if (tipSmeca == kanta.Key)
                     {
-                        pictureBox.Hide();
-                        listaSmecaSaSmecemUPanelu[pictureBox].Hide();
+                        promenljive.SakriSmece(pictureBox);
                         brSmecaUKanti++;
                         label1.Text = brSmecaUKanti.ToString();
-                        label2.Text = $"БРАВО! {brSmecaUKanti}/{brSmeca}";
+                        label2.Text = $"БРАВО! {brSmecaUKanti}/{promenljive.BrSmeca}";
                         await Task.Delay(1000);
                         label2.Text = "";
                     }
                     else
                     {
-                        pictureBox.Location = defaultPozicijeSmeca[pictureBox.Name];
+                        pictureBox.Location = promenljive.DefaultPozicijeSmeca[pictureBox.Name];
                         label3.Text = "ПОГРЕШНА КАНТА!";
                         await Task.Delay(1000);
                         label3.Text = "";
@@ -136,29 +125,18 @@ namespace Igrica
 
         private void ResetAll_Click(object sender, EventArgs e)
         {
+            ResetujSveNaEkranu();
+        }
+
+        private void ResetujSveNaEkranu()
+        {
             brSmecaUKanti = 0;
             label1.Text = brSmecaUKanti.ToString();
             label2.Text = "";
 
-            foreach(var pBox in listaSmecaSaSmecemUPanelu)
-            {
-                pBox.Key.Show();
-                pBox.Value.Show();
-                pBox.Key.Location = defaultPozicijeSmeca[pBox.Key.Name];  //Zato sto pamti pocetnu poziciju 
-            }
-
-            defaultPozicijeSmeca = new Dictionary<string, Point>();
-            PostaviDefaultPozicijeSmeca();
+            promenljive.ResetSmece();
         }
 
-        private void InicijalizujListuSmecaSaSmecemUPanelu()
-        {
-            listaSmecaSaSmecemUPanelu.Add(pictureBox1, pictureBox1Panel);
-            listaSmecaSaSmecemUPanelu.Add(pictureBox2, pictureBox2Panel);
-            listaSmecaSaSmecemUPanelu.Add(pictureBox3, pictureBox3Panel);
-            listaSmecaSaSmecemUPanelu.Add(pictureBox4, pictureBox4Panel);
-            listaSmecaSaSmecemUPanelu.Add(pictureBox5, pictureBox5Panel);
-        }
         private void InicijalizujTipoveKantiZaSmeceINjihovePozicije()
         { 
             tipoviKantiZaSmeceIPozicije.Add(Smece.Plastika.ToString(), new Rectangle(KantaPlastika.Location, KantaPlastika.Size));
@@ -174,11 +152,37 @@ namespace Igrica
         }
         private void PostaviDefaultVrednostLabela()
         {
-            brSmeca = listaSmecaSaSmecemUPanelu.Count;
             label1.Text = brSmecaUKanti.ToString();
             label2.Text = "";
             label3.Text = "";
         }
 
+        private void StartIgruSoba_Click(object sender, EventArgs e)
+        {
+            panelIzaberiIgru.Hide();
+            promenljive = new PromenljiveSoba(DictionarySmeceISmeceUPanelu(), this,
+                                              @"C:\Users\PC\source\repos\ProjekatZaFakultet\Igrica\slike\bg1.jpg");
+        }
+
+        private void StartIgruSuma_Click(object sender, EventArgs e)
+        {
+            panelIzaberiIgru.Hide();
+            promenljive = new PromenljiveSuma(DictionarySmeceISmeceUPanelu(), this,
+                                             @"C:\Users\PC\source\repos\ProjekatZaFakultet\Igrica\slike\bg2.jpg");
+        }
+
+        private void StartIgruUcionica_Click(object sender, EventArgs e)
+        {
+            panelIzaberiIgru.Hide();
+            promenljive = new PromenljiveUcionica(DictionarySmeceISmeceUPanelu(), this,
+                                             @"C:\Users\PC\source\repos\ProjekatZaFakultet\Igrica\slike\bg3.jpg");
+        }
+
+        private void Back_Click(object sender, EventArgs e)
+        {
+            panelIzaberiIgru.Show();
+            panelIzaberiIgru.BringToFront();
+            ResetujSveNaEkranu();
+        }
     }
 }
